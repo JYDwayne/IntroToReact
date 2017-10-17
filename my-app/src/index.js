@@ -19,7 +19,8 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      arr: Array(9).fill(null)
+      arr: Array(9).fill(null),
+      xIsNext: true
     }
   }
   renderSquare(i) {
@@ -32,8 +33,7 @@ class Board extends React.Component {
   }
 
   render() {
-    const status = 'Next player: X';
-
+    const status = this.state.xIsNext ? 'Next player: X' : 'Next player: O';
     return (
       <div>
         <div className="status">{status}</div>
@@ -57,7 +57,9 @@ class Board extends React.Component {
   }
 
   changeData(data) {
-    alert('fdfd')
+    const arr = this.state.arr.slice();
+    arr[data] = this.state.xIsNext? 'x':'o';
+    this.setState({arr: arr, xIsNext: !this.state.xIsNext})
   }
 
 }
