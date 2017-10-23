@@ -2,18 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <button onClick={ () => this.props.onClick() } className="square">
-        {this.props.value}
-      </button>
-    );
-  }
-}
+import {
+  Square
+} from './components/square.js'
 
 class Board extends React.Component {
   renderSquare(i) {
@@ -26,6 +17,7 @@ class Board extends React.Component {
   }
 
   render() {
+    console.log('render in Board')
     return (
       <div>
         <div className="board-row">
@@ -62,7 +54,7 @@ class Game extends React.Component {
   }
 
   render() {
-
+    console.log('render in game')
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
@@ -72,11 +64,13 @@ class Game extends React.Component {
         'Go to move #' + move :
         'Go to game start';
       return (
-      <li key={move}>
+        <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
     })
+
+    console.log(moves)
 
     let status;
     if (winner) {
@@ -101,7 +95,6 @@ class Game extends React.Component {
         </div>
         <div>{temp}</div>
       </div>
-
     );
   }
 
